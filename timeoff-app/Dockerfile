@@ -14,26 +14,31 @@
 # 4. Login to running container (to update config (vi config/app.json): 
 #	docker exec -ti --user root alpine_timeoff /bin/sh
 # --------------------------------------------------------------------
-FROM alpine:3.8
+
+# Alpine Image with Log4Shell CVE not detected
+FROM alpine:3.13.8 
 
 EXPOSE 3000
 
 LABEL org.label-schema.schema-version="1.0"
 LABEL org.label-schema.docker.cmd="docker run -d -p 3000:3000 --name alpine_timeoff"
 
-RUN apk add --no-cache \
-    git \
+RUN apk add --update --no-cache \
     make \
-    nodejs npm \
-    python \
+    nodejs \
+    npm \
+    python3 \
     vim
-    
-RUN adduser --system app --home /app
-USER app
-WORKDIR /app
-RUN git clone https://github.com/timeoff-management/application.git timeoff-management
-WORKDIR /app/timeoff-management
 
-RUN npm install
+# you'll likely want the latest npm, regardless of node version, for speed and fixes
+# but pin this version for the best stability
+RUN npm i npm@latest -g
+
+RUN adduser --system timeoff-app --home /app
+USER timeoff-app
+WORKDIR /app/timeoff-management
+COPY --chown=timeoff-app:timeoff-app . .
+
+RUN npm install --no-optional && npm cache clean --force
 
 CMD npm start
