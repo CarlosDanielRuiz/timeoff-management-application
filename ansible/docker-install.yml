@@ -2,6 +2,8 @@
 # Install Docker Engine on Debian - https://docs.docker.com/engine/install/debian/
 - hosts: vagrant_debian10
   become: yes
+  vars:  
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
 
   # Install Docker
@@ -14,23 +16,23 @@
         - lsb-release
 
   - name: Add Docker's official GPG key
-    ansible.builtin.shell: curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    shell: curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
   - name: Install Docker
-    ansible.builtin.shell: curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
+    shell: curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
   
   - name: Remove Docker's official GPG key
-    ansible.builtin.file:
+    file:
       path: /usr/share/keyrings/docker-archive-keyring.gpg
       state: absent
 
   - name: Remove get-docker.sh
-    ansible.builtin.file:
+    file:
       path: get-docker.sh
       state: absent
 
   - name: Add User Permissions to Docker group
-    ansible.builtin.shell: sudo usermod -aG docker vagrant
+    shell: sudo usermod -aG docker vagrant
 
   - name: Ensure docker deamon is running
     service:
@@ -41,17 +43,17 @@
   # Install Docker SDK
   - name: Install Python3 pip
     apt:
-      name: python3-pip
+      name: 
+        - python3-pip
   
   - name: Install Python SDK
     pip:
-      name:
-        - docker
-        - docker-compose
+      name: docker
+      executable: pip3
 
   # https://www.jeffgeerling.com/blog/2021/allowing-ansible-playbooks-work-new-user-groups-on-first-run
   # - name: Reload a Linux user's group assignments without logging out
-  #   ansible.builtin.command: sg docker -c "docker --version"
+  #   shell: sg docker -c "docker --version"
 
   # - name: Test Docker user access
-  #   ansible.builtin.shell: docker --version
+  #   shell: docker --version

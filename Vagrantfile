@@ -13,5 +13,13 @@ Vagrant.configure("2") do |config|
     debian10_config.vm.provider "vmware_fusion" do |vmware_fusion|
       vmware_fusion.memory = "2048" # 2 GBs
     end
+    debian10_config.vm.synced_folder ".", "/vagrant"
+    debian10_config.vm.provision "ansible_local" do |ansible|
+      #ansible.verbose        = "v"
+      ansible.config_file    = "ansible/ansible.cfg"
+      ansible.inventory_path = "ansible/"
+      ansible.limit          = "vagrant_debian10"
+      ansible.playbook       = "ansible/playbook.yml"
+    end
   end
 end
