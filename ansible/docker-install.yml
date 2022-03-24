@@ -4,6 +4,7 @@
   become: yes
   tasks:
 
+  # Install Docker
   - name: Install Docker prerequisites
     apt:
       name:
@@ -36,6 +37,17 @@
       name: docker
       state: started
     become: true
+
+  # Install Docker SDK
+  - name: Install Python3 pip
+    apt:
+      name: python3-pip
+  
+  - name: Install Python SDK
+    pip:
+      name:
+        - docker
+        - docker-compose
 
   # https://www.jeffgeerling.com/blog/2021/allowing-ansible-playbooks-work-new-user-groups-on-first-run
   # - name: Reload a Linux user's group assignments without logging out

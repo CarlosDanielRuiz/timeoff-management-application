@@ -1,0 +1,12 @@
+---
+# Start an initial timeoff-app container
+- hosts: vagrant_debian10
+  tasks:
+
+  - name: Start a timeoff-app container
+    community.docker.docker_container:
+      image: carlosdruizg/timeoff-app-demo:latest
+      name: timeoff-app-demo
+      ports:
+        - "3000:3000"
+  
