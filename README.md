@@ -6,8 +6,13 @@ Web application for managing employee absences with automatic deployment using V
     - [Building the Docker Image](#building-the-docker-image)
     - [Running the Docker Image](#running-the-docker-image)
 
+## Architecture
+![Architecture](docs/imgs/architecture.jpeg)
+
 ## Requirements
-- Docker >= 20.10.13 (For local testing of [timeoff-app](timeoff-app/README.md))
+- Docker >= 20.10.13 (For [timeoff-app](timeoff-app/README.md) local testing)
+- VMware Fusion >= 12.1.0
+- Vagrant >= 2.2.19
 
 ## TimeOff.Management Application
 #### Building the Docker Image
