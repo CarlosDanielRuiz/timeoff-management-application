@@ -1,0 +1,14 @@
+---
+# Start an initial timeoff-app container
+- hosts: vagrant_debian10
+  become: yes
+  vars:  
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+  - name: Start a timeoff-app container
+    docker_container:
+      image: carlosdruizg/timeoff-app-demo:latest
+      name: timeoff-app-demo
+      ports:
+        - "3000:3000"

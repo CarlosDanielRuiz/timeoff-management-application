@@ -1,0 +1,5 @@
+---
+# Install Docker Depencencies into VMware
+- import_playbook: docker-install.yml
+# Start the latest Docker image available version of timeoff-app
+- import_playbook: run-timeoff-container.yml
