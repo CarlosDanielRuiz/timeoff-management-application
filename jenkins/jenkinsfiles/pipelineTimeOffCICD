@@ -1,0 +1,6 @@
+@Library('shared-libs') _
+pipelineTimeOffCICD {
+    timeoffAppPath     = 'timeoff-app'
+    dockerfileName     = "${timeoffAppPath}/Dockerfile"
+    dockerBuildContext = "${timeoffAppPath}"
+}
