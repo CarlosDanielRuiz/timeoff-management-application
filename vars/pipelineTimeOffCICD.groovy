@@ -16,13 +16,11 @@ def call(body) {
         stages {
             stage('Docker Hub login') {
                 steps {
-                    utilAwsEcrAuth dockerRegistryUrl: dockerPullRegistryUrl
+                    utilDockerLogin dockerLoginUsername = $DOCKER_HUB_CREDS_USR dockerLoginPassword = $DOCKER_HUB_CREDS_PSW
                 }
             }
             stage('TimeOff Build - Docker Steps') {
                 steps {
-                    // Docker Login
-                    utilDockerLogin dockerLoginUsername = $DOCKER_HUB_CREDS_USR dockerLoginPassword = $DOCKER_HUB_CREDS_PSW
                     // Docker Build
                     utilDockerBuild taggedImage: taggedImage, dockerfileName: dockerfileName, dockerBuildContext: dockerBuildContext
                     // Docker Push
