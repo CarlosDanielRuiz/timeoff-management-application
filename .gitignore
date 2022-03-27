@@ -16,6 +16,9 @@ node_modules/
 # Vagrant 
 .vagrant
 
+# Ansible
+*.retry
+
 ## Node .gitignore template ##
 # Logs
 logs

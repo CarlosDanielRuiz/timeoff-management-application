@@ -24,7 +24,7 @@ docker build --pull --no-cache -f timeoff-app/Dockerfile -t timeoff:latest timeo
 
 #### Running the Docker Image
 ```bash
-docker run --rm -d -p 3000:3000 --name alpine_timeoff timeoff
+docker run --rm -d -p 3000:3000 --name timeoff-app-demo timeoff-app-demo:tagname
 ```
 
 ## Vagrant

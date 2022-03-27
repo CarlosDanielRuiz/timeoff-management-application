@@ -48,7 +48,9 @@
   
   - name: Install Python SDK
     pip:
-      name: docker
+      name: 
+      - docker
+      - docker-compose
       executable: pip3
 
   # https://www.jeffgeerling.com/blog/2021/allowing-ansible-playbooks-work-new-user-groups-on-first-run

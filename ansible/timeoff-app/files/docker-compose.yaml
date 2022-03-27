@@ -1,0 +1,8 @@
+# docker-compose.yaml
+version: '3.8'
+services:
+  timeoff-app-demo:
+    image: carlosdruizg/timeoff-app-demo:latest
+    ports:
+      - 3000:3000
+    container_name: timeoff-app-demo
