@@ -1,10 +1,19 @@
 # TimeOff.Management - Release Manager Challenge
 Web application for managing employee absences with automatic deployment using VMware, Vagrant, Ansible, Jenkins and GitHub.
 
-- [Requirements](#requirements)
-- [TimeOff.Management Application](#timeoffmanagement-application)
-    - [Building the Docker Image](#building-the-docker-image)
-    - [Running the Docker Image](#running-the-docker-image)
+- [TimeOff.Management - Release Manager Challenge](#timeoffmanagement---release-manager-challenge)
+  - [Architecture](#architecture)
+  - [Requirements](#requirements)
+  - [TimeOff.Management Application](#timeoffmanagement-application)
+      - [Building the Docker Image](#building-the-docker-image)
+      - [Running the Docker Image](#running-the-docker-image)
+  - [Vagrant](#vagrant)
+      - [Deployment with Vagrant](#deployment-with-vagrant)
+      - [Destroy Vagrant running machine](#destroy-vagrant-running-machine)
+  - [Ansible](#ansible)
+  - [Jenkins](#jenkins)
+      - [Configuring Jenkins](#configuring-jenkins)
+      - [Running Jenkins with Docker Compose](#running-jenkins-with-docker-compose)
 
 ## Architecture
 ![Architecture](docs/imgs/architecture.jpg)
@@ -12,6 +21,7 @@ Web application for managing employee absences with automatic deployment using V
 ---
 ## Requirements
 - Docker >= 20.10.13 (For [timeoff-app](timeoff-app/README.md) local testing)
+- Docker Compose >= v2.3.3
 - VMware Fusion >= 12.1.0
 - Vagrant >= 2.2.19
 
@@ -38,9 +48,19 @@ vagrant destroy --force debian10
 ```
 
 ## Ansible
-For manual Ansible execution and testing.
+For manual Ansible execution and testing in the Vagrant VM.
 ```bash
 cd ansible
 ansible-playbook docker-install.yml
 ansible-playbook run-timeoff-container.yml
+```
+
+## Jenkins
+#### Configuring Jenkins 
+- [TechWorld with Nana - Jenkins Tutorial](https://www.youtube.com/playlist?list=PLy7NrYWoggjw_LIiDK1LXdNN82uYuuuiC)
+- [Docker inside Docker for Jenkins](https://itnext.io/docker-inside-docker-for-jenkins-d906b7b5f527)
+
+#### Running Jenkins with Docker Compose
+```bash
+docker-compose up -d
 ```
