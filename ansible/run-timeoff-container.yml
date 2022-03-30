@@ -6,9 +6,15 @@
     ansible_python_interpreter: /usr/bin/python3
   tasks:
 
-  - name: Start a timeoff-app container
-    docker_container:
-      image: carlosdruizg/timeoff-app-demo:latest
-      name: timeoff-app-demo
-      ports:
-        - "3000:3000"
+  - name: Copy timeoff-app docker-compose with owner and permissions
+    copy:
+      src: timeoff-app/files/docker-compose.yaml
+      dest: /home/vagrant/docker-compose.yaml
+      owner: vagrant
+      group: vagrant
+      mode: '0644'
+
+  - name: Start a timeoff-app container using docker-compose
+    docker_service:
+      project_src: /home/vagrant/
+      files: docker-compose.yaml

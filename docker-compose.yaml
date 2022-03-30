@@ -1,0 +1,15 @@
+# docker-compose.yaml
+version: '3.8'
+services:
+  jenkins:
+    build:
+      context: ./jenkins/
+    #privileged: true
+    #user: root
+    ports:
+      - 8080:8080 # By default runs on that port
+      - 50000:50000 # Master/Slave Communication
+    container_name: jenkins
+    volumes:
+      - ./jenkins/jenkins_home:/var/jenkins_home # Persist data of Jenkins
+      - /var/run/docker.sock:/var/run/docker.sock
